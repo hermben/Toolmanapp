@@ -1,13 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import{Home} from './Home';
 import{Users} from './Users';
 import{Items} from './Items';
-import{SubItems} from './SubItems';
-import{ItemTypes} from './ItemTypes';
-import{Checkins} from './Checkins';
-import{Chechouts} from './Checkouts';
-import {BrowserRouter,Router,Route,Routes,NavLink} from 'react-router-dom';
+
+import {BrowserRouter,Route,Routes,NavLink} from 'react-router-dom';
 
 function App() {
   return (
