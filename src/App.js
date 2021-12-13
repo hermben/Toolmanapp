@@ -2,8 +2,9 @@ import './App.css';
 import{Home} from './Home';
 import{Users} from './Users';
 import{Items} from './Items';
-
+import {ItemTypes} from './ItemTypes';
 import {BrowserRouter,Route,Routes,NavLink} from 'react-router-dom';
+
 
 function App() {
   return (
@@ -31,6 +32,11 @@ function App() {
               Items
             </NavLink>
           </li>
+          <li className= "nav-item- M-1">
+            <NavLink className="btn btn-light btn-outline-primary" to="/itemTypes">
+              ItemTypes
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
@@ -38,6 +44,7 @@ function App() {
         <Route exact path="/home" element={<Home/>}/>
         <Route exact path="/users" element={<Users/>}/>
         <Route exact path="/items" element={<Items/>}/>
+        <Route exact path="/ItemTypes" element={<ItemTypes/>}/>
       </Routes>
     </div>
     </BrowserRouter> 

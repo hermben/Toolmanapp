@@ -11,7 +11,12 @@ export class Users extends Component {
             modalTitle: "",
             UserId: "",
             UserName: "",
-            userEmail: ""
+            UserEmail: "",
+            UserPassword:"",
+            UserAddress:"",
+            RegistrationDate:"",
+            IsAdmin:"",
+            PhotoFileName:""
         }
     }
 
@@ -28,16 +33,39 @@ export class Users extends Component {
     componentDidMount() {
         this.refreshList();
     }
-
     changeUserName = (e) => {
         this.setState({UserName: e.target.value});
+    }
+    changeUserEmail = (e) => {
+        this.setState({UserEmail: e.target.value});
+    }
+    changeUserPassword = (e) => {
+        this.setState({UserPassword: e.target.value});
+    }
+    changeUserAddress = (e) => {
+        this.setState({UserAddress: e.target.value});
+    }
+    changeRegistrationDate = (e) => {
+        this.setState({RegistrationDate: e.target.value});
+    }
+    changeIsAdmin = (e) => {
+        this.setState({IsAdmin: e.target.value});
+    }
+    changePhotoFileName = (e) => {
+        this.setState({PhotoFileName: e.target.value});
     }
 
     addClick() {
         this.setState({
             modalTitle: "Add Users",
-            UserId: 0,
-            UserName: ""
+            UserId:0,
+            UserName: "",
+            UserPassword:"",
+            UserEmail: "",
+            UserAddress:"",
+            RegistrationDate:"",
+            IsAdmin:"",
+            PhotoFileName:""
         });
     }
 
@@ -46,7 +74,13 @@ export class Users extends Component {
         this.setState({
             modalTitle: "edit Users",
             UserId: us.UserId,
-            UserName: us.UserName
+            UserName: us.UserName,
+            UserEmail: us.UserEmail,
+            UserPassword:us.UserPassword,
+            UserAddress:us.UserAddress,
+            RegistrationDate:us.RegistrationDate,
+            IsAdmin:us.IsAdmin,
+            PhotoFileName:us.PhotoFileName
         });
     }
 
@@ -59,7 +93,17 @@ export class Users extends Component {
 
             },
              body:JSON.stringify({
-                UserName:this.state.UserName
+                UserName:this.state.UserName,
+                UserEmail:this.state.UserEmail,
+                UserPassword:this.state.UserPassword,
+                UserAddress:this.state.UserAddress,
+                RegistrationDate:this.state.RegistrationDate,
+                IsAdmin:this.state.IsAdmin,
+                PhotoFileName:this.state.PhotoFileName
+                
+
+                
+
             })
         })
         .then(res=>res.json())
@@ -81,8 +125,13 @@ export class Users extends Component {
 
             },
              body:JSON.stringify({
-                UserId:this.state.UserId,
-                UserName:this.state.UserName
+                UserName:this.state.UserName,
+                UserEmail:this.state.UserEmail,
+                UserPassword:this.state.UserPassword,
+                UserAddress:this.state.UserAddress,
+                RegistrationDate:this.state.RegistrationDate,
+                IsAdmin:this.state.IsAdmin,
+                PhotoFileName:this.state.PhotoFileName
             })
         })
         .then(res=>res.json())
@@ -122,7 +171,13 @@ export class Users extends Component {
             users,
             modalTitle,
             UserId,
-            UserName
+            UserName,
+            UserEmail,
+            UserPassword,
+            UserAddress,
+            RegistrationDate,
+            IsAdmin,
+            PhotoFileName
         } = this.state;
         return (
             <div>
@@ -143,15 +198,32 @@ export class Users extends Component {
                                 UserName
                             </th>
                             <th>
-                                Options
+                                User Email
+                            </th>
+                            <th>
+                                Password
+                            </th>
+                            <th>
+                                Address
+                            </th>
+                            <th>
+                                Registration Date
+                            </th>
+                            <th>
+                               Is Admin
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {users.map(us =>
-                            <tr key={us.UserId}>
-                                <td>{us.UserId}</td>
-                                <td>{us.UserName}</td>
+                            <tr key={us.UserID}>
+                                <td>{us.UserID}</td>
+                                <td>{us.Email}</td>
+                                <td>{us.password}</td>
+                                <td>{us.Address}</td>
+                                <td>{us.RegistrationDate}</td>
+                                <td>{us.IsAdmin}</td>
+                                <td>{us.PhotoFileName}</td>
                                 <td>
                                     <button type="button"
                                         className="btn btn-light m-1"
@@ -166,7 +238,7 @@ export class Users extends Component {
 
                                     <button type="button"
                                         className="btn btn-light mr-1"
-                                        onClick={()=>this.deleteClick(us.UserId)}>
+                                        onClick={()=>this.deleteClick(us.UserID)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                         </svg>
@@ -187,14 +259,50 @@ export class Users extends Component {
                                 <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
                                 </button>
                             </div>
-                            <div className="modal-body">
-                                <div className="input-group mb-3">
-                                    <span className="input-group-text">UserName</span>
-                                    <input type="text" className="form-control"
-                                        value={UserName}
-                                        onChange={this.changeUserName}/>
+                                 <div className="modal-body">
+                                     <div className="input-group mb-3">
+                                      <span className="input-group-text">Name</span>
+                                        <input type="text" className="form-control"
+                                            value={UserName}
+                                            onChange={this.changeUserName}/>
                                 </div>
-                               
+                                   <div className="modal-body">
+                                     <div className="input-group mb-3">
+                                      <span className="input-group-text">Email</span>
+                                        <input type="text" className="form-control"
+                                        value={UserEmail}
+                                        onChange={this.changeUserEmail}/>
+
+                               </div>
+                                <div className="modal-body">
+                                   <div className="input-group mb-3">
+                                    <span className="input-group-text">Password</span>
+                                     <input type="text" className="form-control"
+                                        value={UserPassword}
+                                        onChange={this.changeUserPassword}/>
+                                
+                             </div>
+                                <div className="modal-body">
+                                   <div className="input-group mb-3">
+                                    <span className="input-group-text">Address</span>
+                                     <input type="text" className="form-control"
+                                        value={UserAddress}
+                                        onChange={this.changeUserAddress}/>
+                             </div> 
+                                <div className="modal-body">
+                                   <div className="input-group mb-3">
+                                    <span className="input-group-text">Registration Date</span>
+                                     <input type="DateTime" className="form-control"
+                                        value={RegistrationDate}
+                                        onChange={this.changeRegistrationDate}/>
+                             </div> 
+                                <div className="modal-body">
+                                   <div className="input-group mb-3">
+                                    <span className="input-group-text">Admin</span>
+                                     <input type="text" className="form-control"
+                                        value={IsAdmin}
+                                        onChange={this.changeIsAdmin}/>
+                             </div>
                                 {UserId==0?
                                 <button type="button"
                                 className="btn btn-primary float-start"
@@ -208,19 +316,16 @@ export class Users extends Component {
                                 onClick={()=>this.updateClick()}
                                 >Update</button>
                                 :null}
-                            </div>
                         </div>
                     </div>
-
-
-                </div>
-
-
-
-
-
-            </div>
-
+                 </div>
+            </div>   
+        </div>
+        </div>
+        </div>   
+        </div>  
+        </div>    
+        </div>                       
         )
 
     }
