@@ -187,12 +187,16 @@ export class ItemTypes extends Component {
                                 <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
                                 </button>
                             </div>
-                            <div className="modal-body">
-                                <div className="input-group mb-3">
+                        <div className="modal-body">
+                             <div className="d-flex flex-row bd-highlight mb-3">
+
+                                 <div className="p-2 w-50 bd-highlight">
+                                   <div className="input-group mb-3">
                                     <span className="input-group-text">itemTypeName</span>
                                     <input type="text" className="form-control"
                                         value={itemTypeName}
                                         onChange={this.changeitemTypeName}/>
+                                </div>
                                 </div>
                                
                                 {itemTypeId==0?
@@ -208,6 +212,7 @@ export class ItemTypes extends Component {
                                 onClick={()=>this.updateClick()}
                                 >Update</button>
                                 :null}
+                             </div>
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,8 @@ export class Users extends Component {
             UserAddress:"",
             RegistrationDate:"",
             IsAdmin:"",
-            PhotoFileName:""
+            PhotoFileName:"",
+            PhotoPath:variables.PHOTO_URL
         }
     }
 
@@ -65,7 +66,7 @@ export class Users extends Component {
             UserAddress:"",
             RegistrationDate:"",
             IsAdmin:"",
-            PhotoFileName:""
+            PhotoFileName:"anonymous.png"
         });
     }
 
@@ -100,10 +101,6 @@ export class Users extends Component {
                 RegistrationDate:this.state.RegistrationDate,
                 IsAdmin:this.state.IsAdmin,
                 PhotoFileName:this.state.PhotoFileName
-                
-
-                
-
             })
         })
         .then(res=>res.json())
@@ -125,6 +122,7 @@ export class Users extends Component {
 
             },
              body:JSON.stringify({
+                UserId:this.state.UserId,
                 UserName:this.state.UserName,
                 UserEmail:this.state.UserEmail,
                 UserPassword:this.state.UserPassword,
@@ -164,6 +162,21 @@ export class Users extends Component {
         }
     }
 
+    imageUpload=(e)=>{
+            e.preventDefault();
+
+            const formData=new FormData();
+            formData.append("file",e.target.files[0],e.target.files[0].name);
+
+            fetch(variables.API_URL+'users/savefile',{
+                method:'POST',
+                body:formData
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                this.setState({PhotoFileName:data});
+            })
+    }
 
 
     render() {
@@ -177,6 +190,7 @@ export class Users extends Component {
             UserAddress,
             RegistrationDate,
             IsAdmin,
+            PhotoPath,
             PhotoFileName
         } = this.state;
         return (
@@ -218,12 +232,12 @@ export class Users extends Component {
                         {users.map(us =>
                             <tr key={us.UserID}>
                                 <td>{us.UserID}</td>
+                                <td>{us.UserName}</td>
                                 <td>{us.Email}</td>
                                 <td>{us.password}</td>
                                 <td>{us.Address}</td>
                                 <td>{us.RegistrationDate}</td>
                                 <td>{us.IsAdmin}</td>
-                                <td>{us.PhotoFileName}</td>
                                 <td>
                                     <button type="button"
                                         className="btn btn-light m-1"
@@ -259,50 +273,59 @@ export class Users extends Component {
                                 <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
                                 </button>
                             </div>
-                                 <div className="modal-body">
+                                <div className="modal-body">
+                                 <div className="d-flex flex-row bd-highlight mb-3">
+
+                                  <div className="p-2 w-50 bd-highlight">
+
                                      <div className="input-group mb-3">
-                                      <span className="input-group-text">Name</span>
+                                        <span className="input-group-text">Name</span>
                                         <input type="text" className="form-control"
                                             value={UserName}
-                                            onChange={this.changeUserName}/>
-                                </div>
-                                   <div className="modal-body">
+                                            onChange={this.changeUserName}/>   
+                                    </div>
+                            
                                      <div className="input-group mb-3">
                                       <span className="input-group-text">Email</span>
                                         <input type="text" className="form-control"
                                         value={UserEmail}
                                         onChange={this.changeUserEmail}/>
+                                    </div>
 
-                               </div>
-                                <div className="modal-body">
                                    <div className="input-group mb-3">
-                                    <span className="input-group-text">Password</span>
-                                     <input type="text" className="form-control"
+                                        <span className="input-group-text">Password</span>
+                                        <input type="text" className="form-control"
                                         value={UserPassword}
                                         onChange={this.changeUserPassword}/>
-                                
-                             </div>
-                                <div className="modal-body">
+                                 </div>
+
                                    <div className="input-group mb-3">
-                                    <span className="input-group-text">Address</span>
-                                     <input type="text" className="form-control"
+                                        <span className="input-group-text">Address</span>
+                                        <input type="text" className="form-control"
                                         value={UserAddress}
                                         onChange={this.changeUserAddress}/>
-                             </div> 
-                                <div className="modal-body">
-                                   <div className="input-group mb-3">
-                                    <span className="input-group-text">Registration Date</span>
-                                     <input type="DateTime" className="form-control"
+                                  </div> 
+                              
+                                      <div className="input-group mb-3">
+                                      <span className="input-group-text">Registration Date</span>
+                                      <input type="date" className="form-control"
                                         value={RegistrationDate}
                                         onChange={this.changeRegistrationDate}/>
-                             </div> 
-                                <div className="modal-body">
+                                   </div> 
+
                                    <div className="input-group mb-3">
                                     <span className="input-group-text">Admin</span>
                                      <input type="text" className="form-control"
                                         value={IsAdmin}
                                         onChange={this.changeIsAdmin}/>
-                             </div>
+                                  </div>
+
+                             <div className="p-2 w-50 bd-highlight">
+                                    <img width="200px" height="200px"
+                                    src={PhotoPath+PhotoFileName}/>
+                                    <input className="m-2" type="file" onChange={this.imageUpload}/>
+                            </div>
+                          </div>
                                 {UserId==0?
                                 <button type="button"
                                 className="btn btn-primary float-start"
@@ -316,16 +339,13 @@ export class Users extends Component {
                                 onClick={()=>this.updateClick()}
                                 >Update</button>
                                 :null}
+                          </div>
+                                    
+                            </div>  
                         </div>
                     </div>
                  </div>
-            </div>   
-        </div>
-        </div>
-        </div>   
-        </div>  
-        </div>    
-        </div>                       
+            </div>                         
         )
 
     }
