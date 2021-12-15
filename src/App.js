@@ -3,7 +3,7 @@ import{Home} from './Home';
 import{Users} from './Users';
 import{Items} from './Items';
 import {ItemTypes} from './ItemTypes';
-import {BrowserRouter,Route,Routes,NavLink} from 'react-router-dom';
+import {BrowserRouter,Route,Routes,NavLink, Link} from 'react-router-dom';
 
 
 function App() {
@@ -17,25 +17,27 @@ function App() {
 
       <nav className="navbar navbar-expand-sm bg-light navbar-dark">
         <ul className="navbar-nav">
-          <li className= "nav-item- M-1">
+          <li className= "nav-item M-1">
             <NavLink className="btn btn-light btn-outline-primary" to="/home">
               Home
             </NavLink>
           </li>
-          <li className= "nav-item- M-1">
+          <li className= "nav-item M-1">
             <NavLink className="btn btn-light btn-outline-primary" to="/users">
               Users
             </NavLink>
           </li>
-          <li className= "nav-item- M-1">
-            <NavLink className="btn btn-light btn-outline-primary" to="/items">
-              Items
-            </NavLink>
-          </li>
-          <li className= "nav-item- M-1">
-            <NavLink className="btn btn-light btn-outline-primary" to="/itemTypes">
-              ItemTypes
-            </NavLink>
+          <li className= "nav-item M-1">
+            <div className="dropdown">
+              <a className="btn btn-light btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Menu
+              </a>
+
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><Link className="dropdown-item" to="/items">Items</Link></li>
+                <li><Link className="dropdown-item" to="/itemTypes">Item types</Link></li>
+              </ul>
+            </div>
           </li>
         </ul>
       </nav>
