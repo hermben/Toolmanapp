@@ -199,14 +199,14 @@ export class ItemTypes extends Component {
                                 </div>
                                 </div>
                                
-                                {itemTypeId==0?
+                                {itemTypeId===0?
                                 <button type="button"
                                 className="btn btn-primary float-start"
                                 onClick={()=>this.createClick()}
                                 >Create</button>
                                 :null}
 
-                                {itemTypeId!=0?
+                                {itemTypeId!==0?
                                 <button type="button"
                                 className="btn btn-primary float-start"
                                 onClick={()=>this.updateClick()}
