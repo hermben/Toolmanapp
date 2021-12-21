@@ -205,7 +205,7 @@ export class Items extends Component {
                     <tbody>
                         {Items.map(it =>
                             <tr key={it.ItemID}>
-                                <td>{it.ItemTypeName + " * " + it.ItemTypeID}</td>
+                                <td>{it.ItemTypeName}</td>
                                 <td>{it.ItemName}</td>
                                 <td>{it.ItemSerial}</td>
                                 <td>{it.ItemDescription}</td>

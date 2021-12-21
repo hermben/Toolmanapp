@@ -3,6 +3,7 @@ import{Home} from './Home';
 import{Users} from './Users';
 import{Items} from './Items';
 import {ItemTypes} from './ItemTypes';
+import {Checkouts} from './Checkouts';
 import {BrowserRouter,Route,Routes,NavLink, Link} from 'react-router-dom';
 
 
@@ -26,6 +27,11 @@ function App() {
             <NavLink className="btn btn-light btn-outline-primary" to="/users">
               Users
             </NavLink>
+          </li> 
+           <li className= "nav-item M-1">
+            <NavLink className="btn btn-light btn-outline-primary" to="/checkouts">
+              Checkouts
+            </NavLink>
           </li>
           <li className= "nav-item M-1">
             <div className="dropdown">
@@ -36,6 +42,7 @@ function App() {
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><Link className="dropdown-item" to="/items">Items</Link></li>
                 <li><Link className="dropdown-item" to="/itemTypes">Item types</Link></li>
+                <li><Link className="dropdown-item" to="/users">Users</Link></li>
               </ul>
             </div>
           </li>
@@ -45,7 +52,8 @@ function App() {
       <Routes>
         <Route exact path="/home" element={<Home/>}/>
         <Route exact path="/users" element={<Users/>}/>
-        <Route exact path="/items" element={<Items/>}/>
+        <Route exact path="/Checkouts" element={<Checkouts/>}/>
+        <Route exact path="/Items" element={<Items/>}/>
         <Route exact path="/ItemTypes" element={<ItemTypes/>}/>
       </Routes>
     </div>
