@@ -9,24 +9,24 @@ export class Checkouts extends Component {
 
         this.state = {
             Checkouts: [],
-            Items:[],
-            Users:[],
-            ItemTypes:[],
+            Items: [],
+            Users: [],
+            ItemTypes: [],
             modalTitle: "",
             modalTitle: "",
-            CheckoutId:0,
-            CheckoutTime:0,
-            ItemType:0,
+            CheckoutId: 0,
+            CheckoutTime: 0,
+            ItemType: 0,
             ItemId: 0,
             ItemName: "",
-            UserId:0,
+            UserId: 0,
             UserName: "",
-            IsCheckin: false ,
-            ItemTypeId:0,
-            UserSignature:"",
-            CheckinId:0
-            
-              
+            IsCheckin: false,
+            ItemTypeId: 0,
+            UserSignature: "",
+            CheckinId: 0
+
+
         }
     }
 
@@ -35,21 +35,21 @@ export class Checkouts extends Component {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                this.setState({ Checkouts:data });
+                this.setState({ Checkouts: data });
                 console.log(data);
             });
-        fetch(variables.API_URL+ 'Users')
-          .then(response=> response.json())
-          .then(data=>{
-              this.setState({Users: data});
-              console.log(data);
-          });    
-        fetch(variables.API_URL+ 'Items')
-          .then(response=> response.json())
-          .then(data=>{
-              this.setState({Items: data});
-              console.log(data);
-          });  
+        fetch(variables.API_URL + 'Users')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ Users: data });
+                console.log(data);
+            });
+        fetch(variables.API_URL + 'Items')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ Items: data });
+                console.log(data);
+            });
     }
 
     componentDidMount() {
@@ -60,195 +60,85 @@ export class Checkouts extends Component {
         this.setState({ UserId: e.target.value });
     }
 
-     changeUserSignature = (e) => {
-         this.setState({ UserSignature: e.target.value });
-     }
+    changeUserSignature = (e) => {
+        this.setState({ UserSignature: e.target.value });
+    }
     changeItemName = (e) => {
         this.setState({ ItemId: e.target.value });
     }
-   
+
     // changeIsCheckout = (e) => {
     //     this.setState({ IsCheckin: e.target.value === "1" ? false : true });
     // }
-   
-addClick() {
-    this.setState({
-        modalTitle:"Add Checkouts",
-        CheckoutId:0,
-        CheckoutTime:0,
-        ItemType:0,
-        ItemId:0,
-        ItemName:"",
-        UserId:0,
-        UserName:"",
-        IsCheckin:false ,
-        ItemTypeId:0
-    });
 
-}
-
-addClickCheckin() {
-    this.setState({
-        modalTitle:"Add Checkins",
-        CheckinId:0,
-        CheckinTime:0,
-        UserId:0,
-        ItemId:0,
-    });
-
-}
-
-
-
-editClick(ch) {
-    this.setState({
-        modalTitle: "edit Checkouts",
-        CheckoutTime:ch.CheckoutTime,
-        Userid:ch.UserID,
-        UserName:ch.UserName,
-        ItemId:ch.ItemID,
-        ItemName:ch.ItemName,
-        IsCheckin:ch.IsCheckin,
-    });
-}
-editClick(ch) {
-    this.setState({
-        modalTitle2: "edit Checkins",
-        CheckoutTime:ch.CheckoutTime,
-        Userid:ch.UserID,
-        UserName:ch.UserName,
-        ItemId:ch.ItemID,
-        ItemName:ch.ItemName,
-        IsCheckin:ch.IsCheckin,
-    });
-}
-
-
-// editClickCheckin(in){
-//     modalTitle: "edit Checkins",
-//     UserSignature:in.UserSignature,
-//     CheckoutId:in.CheckoutID,
-//     UserId:in.UserID
-// }
-
-UserIdIsValid() {
-    return this.state.UserId !== 0;
-}
-ItemIdIsValide(){
-
-    return this.state.ItemId !== 0;
-}
-
-createClick() {
-    if (!this.UserIdIsValid()) {
-        alert("Please select a user");
-        return;
-    }
-    if(!this.ItemIdIsValide()){
-        alert("Please Select an Item");
-        return;
-    }
-
-    fetch(variables.API_URL + 'Checkouts', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            UserID:this.state.UserId,
-            ItemID:this.state.ItemId,
-        })
-    })
-        .then(res => res.json())
-        .then((result) => {
-            alert(result);
-            this.refreshList();
-        }, (error) => {
-            alert('Failed');
+    addClick() {
+        this.setState({
+            modalTitle: "Add Checkouts",
+            CheckoutId: 0,
+            CheckoutTime: 0,
+            ItemType: 0,
+            ItemId: 0,
+            ItemName: "",
+            UserId: 0,
+            UserName: "",
+            IsCheckin: false,
+            ItemTypeId: 0
         });
 
-}
-
-editClickCheckin(ch) {
-    this.setState({
-        modalTitle2: "edit Checkins",
-        CheckinTime:ch.CheckinTime,
-        Userid:ch.UserID,
-        UserName:ch.UserName,
-        ItemId:ch.ItemID,
-        ItemName:ch.ItemName,
-        IsCheckin:ch.IsCheckin,
-    });
-}
-
-UserSignIsValid() {
-    return this.state.UserSignature !== 0;
-}
-createClickCheckin() {
-    if (!this.UserSignIsValid()) {
-        alert("Please enter you initials");
-        return;
     }
 
-    fetch(variables.API_URL + 'Checkouts', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            CheckinID:this.state.CheckinId,
-            UserSignature:this.state.UserSignature,
-            CheckoutID:this.state.CheckoutId,
-            UserID:this.state.UserId
-        })
-    })
-        .then(res => res.json())
-        .then((result) => {
-            alert(result);
-            this.refreshList();
-        }, (error) => {
-            alert('Failed');
-        })
+    addClickCheckin(ch) { // ch => checkout map
+        this.setState({
+            modalTitle: "Add Checkins",
+            CheckinId: 0,
+            CheckinTime: 0,
+            UserId: ch.UserID,
+            ItemId: ch.ItemID,
+            CheckoutId: ch.CheckoutID,
+        });
 
-}
+    }
 
-updateClickCheckin() {
-    fetch(variables.API_URL + 'checkouts', {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'content-Type': 'application/json'
+    editClick(ch) {
+        this.setState({
+            modalTitle: "edit Checkouts",
+            CheckoutTime: ch.CheckoutTime,
+            Userid: ch.UserID,
+            UserName: ch.UserName,
+            ItemId: ch.ItemID,
+            ItemName: ch.ItemName,
+            IsCheckin: ch.IsCheckin,
+        });
+    }
 
-        },
-        body: JSON.stringify({
-            CheckinID:this.state.CheckinId,
-            UserSignature:this.state.UserSignature,
-            CheckoutID:this.state.CheckoutId,
-            UserID:this.state.UserId
-           
-        })   
-    })
-    .then(res => res.json())
-    .then((result) => {
-        alert(result);
-        this.refreshList();
-    }, (error) => {
-        alert('Failed');
-    });
+    UserIdIsValid() {
+        return this.state.UserId !== 0;
+    }
+    ItemIdIsValide() {
 
-}
+        return this.state.ItemId !== 0;
+    }
 
-deleteClickCheckin(id){
-    if(window.confirm('Are you sure?')) 
-    {
-        fetch(variables.API_URL + 'Checkins/' + id, {
-            method: 'DELETE',
+    createClick() {
+        if (!this.UserIdIsValid()) {
+            alert("Please select a user");
+            return;
+        }
+        if (!this.ItemIdIsValide()) {
+            alert("Please Select an Item");
+            return;
+        }
+
+        fetch(variables.API_URL + 'Checkouts', {
+            method: 'POST',
             headers: {
-                'Accept':'application/json',
-                'content-Type':'application/json'
-            }
+                'Accept': 'application/json',
+                'content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                UserID: this.state.UserId,
+                ItemID: this.state.ItemId,
+            })
         })
             .then(res => res.json())
             .then((result) => {
@@ -256,44 +146,43 @@ deleteClickCheckin(id){
                 this.refreshList();
             }, (error) => {
                 alert('Failed');
-            })  
+            });
+
     }
-}
 
+    editClickCheckin(ch) {
+        this.setState({
+            modalTitle2: "edit Checkins",
+            CheckinTime: ch.CheckinTime,
+            Userid: ch.UserID,
+            UserName: ch.UserName,
+            ItemId: ch.ItemID,
+            ItemName: ch.ItemName,
+            IsCheckin: ch.IsCheckin,
+        });
+    }
 
-updateClick() {
-    fetch(variables.API_URL + 'Items', {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'content-Type': 'application/json'
+    UserSignIsValid() {
+        return this.state.UserSignature !== 0;
+    }
+    createClickCheckin() {
+        if (!this.UserSignIsValid()) {
+            alert("Please enter you initials");
+            return;
+        }
 
-        },
-        body: JSON.stringify({
-            UserID:this.state.UserId,
-            ItemID:this.state.ItemId,
-           
-        })   
-    })
-    .then(res => res.json())
-    .then((result) => {
-        alert(result);
-        this.refreshList();
-    }, (error) => {
-        alert('Failed');
-    });
-
-}
-
-deleteClick(id){
-    if(window.confirm('Are you sure?')) 
-    {
-        fetch(variables.API_URL + 'Checkouts/' + id, {
-            method: 'DELETE',
+        fetch(variables.API_URL + 'Checkins', {
+            method: 'POST',
             headers: {
-                'Accept':'application/json',
-                'content-Type':'application/json'
-            }
+                'Accept': 'application/json',
+                'content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                CheckinID: this.state.CheckinId,
+                UserSignature: this.state.UserSignature,
+                CheckoutID: this.state.CheckoutId,
+                UserID: this.state.UserId
+            })
         })
             .then(res => res.json())
             .then((result) => {
@@ -301,16 +190,105 @@ deleteClick(id){
                 this.refreshList();
             }, (error) => {
                 alert('Failed');
-            })  
+            })
+
     }
-}
+
+    updateClickCheckin() {
+        fetch(variables.API_URL + 'checkouts', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'content-Type': 'application/json'
+
+            },
+            body: JSON.stringify({
+                CheckinID: this.state.CheckinId,
+                UserSignature: this.state.UserSignature,
+                CheckoutID: this.state.CheckoutId,
+                UserID: this.state.UserId
+
+            })
+        })
+            .then(res => res.json())
+            .then((result) => {
+                alert(result);
+                this.refreshList();
+            }, (error) => {
+                alert('Failed');
+            });
+
+    }
+
+    deleteClickCheckin(id) {
+        if (window.confirm('Are you sure?')) {
+            fetch(variables.API_URL + 'Checkins/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then((result) => {
+                    alert(result);
+                    this.refreshList();
+                }, (error) => {
+                    alert('Failed');
+                })
+        }
+    }
 
 
-render (){
-const {
-             modalTitle,
-             modalTitle2,
-             CheckoutId,
+    updateClick() {
+        fetch(variables.API_URL + 'Items', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'content-Type': 'application/json'
+
+            },
+            body: JSON.stringify({
+                UserID: this.state.UserId,
+                ItemID: this.state.ItemId,
+
+            })
+        })
+            .then(res => res.json())
+            .then((result) => {
+                alert(result);
+                this.refreshList();
+            }, (error) => {
+                alert('Failed');
+            });
+
+    }
+
+    deleteClick(id) {
+        if (window.confirm('Are you sure?')) {
+            fetch(variables.API_URL + 'Checkouts/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then((result) => {
+                    alert(result);
+                    this.refreshList();
+                }, (error) => {
+                    alert('Failed');
+                })
+        }
+    }
+
+
+    render() {
+        const {
+            modalTitle,
+            modalTitle2,
+            CheckoutId,
             CheckoutTime,
             Checkouts,
             ItemType,
@@ -324,48 +302,41 @@ const {
             Items,
             UserSignature,
             CheckinId
-}= this.state;
-return (
-<div>
- <button type="button"
-        className="btn btn-primary m-2 float-end"
-        data-bs-toggle="modal2"
-        data-bs-target="#exampleModal2"
-        onClick={() => this.addClickCheckin()}>
-        Add Checkins
-    </button>
-    <button type="button"
-        className="btn btn-primary m-2 float-end"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        onClick={() => this.addClick()}>
-        Add Checkouts
-    </button>
+        } = this.state;
+        return (
+            <div>
+                <button type="button"
+                    className="btn btn-primary m-2 float-end"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    onClick={() => this.addClick()}>
+                    Add Checkouts
+                </button>
 
-    <table className="table table -striped">
-        <thead>
-            <tr>
-                <th>
-                    UserName
-                </th>
-                <th>
-                    Checkout Time
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Checkin Time
-                </th>
-                <th>
-                    Signature
-                </th>
-                <th>
-                   
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+                <table className="table table -striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                UserName
+                            </th>
+                            <th>
+                                Checkout Time
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Checkin Time
+                            </th>
+                            <th>
+                                Signature
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {Checkouts.map(ch =>
                             <tr key={ch.CheckoutID}>
                                 <td>{ch.Name}</td>
@@ -374,13 +345,13 @@ return (
                                 <td>{ch.CheckinTime}</td>
                                 <td>{ch.UserSignature}</td>
                                 <td>
-                                <button type="button"
+                                    <button type="button"
                                         className="btn btn-light m-1"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"
-                                        onClick={() => this.addClickCheckin()}>
+                                        data-bs-target="#exampleModal2"
+                                        onClick={() => this.addClickCheckin(ch)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-right-square" viewBox="0 0 16 16">
-                                        <path fillrule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z"/>
+                                            <path fillrule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z" />
                                         </svg>
                                     </button>
 
@@ -407,6 +378,7 @@ return (
                         )}
                     </tbody>
                 </table>
+
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog moadal-lg modal-dialog-centered">
                         <div className="modal-content">
@@ -421,13 +393,6 @@ return (
 
                                     <div className="p-2 w-100 bd-highlight">
 
-                                        {/* <div className="input-group mb-3">
-                                            <span className="input-group-text">Check out Time</span>
-                                            <input type="text" className="form-control"
-                                                value={CheckoutTime}
-                                                onChange={this.changeCheckoutTime} />
-                                        </div> */}
-
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">User Name</span>
                                             <select className="form-select"
@@ -436,12 +401,12 @@ return (
                                                 <option value={0}>
                                                     Please Select a User
                                                 </option>
-                                                {Users.map(chk=>
+                                                {Users.map(chk =>
                                                     <option key={chk.UserID} value={chk.UserID}>
                                                         {chk.Name}
                                                     </option>
                                                 )}
-                                            </select>  
+                                            </select>
                                         </div>
 
                                         <div className="input-group mb-3">
@@ -452,20 +417,20 @@ return (
                                                 <option value={0}>
                                                     Please Select an Item
                                                 </option>
-                                                {Items.map(che=>
+                                                {Items.map(che =>
                                                     <option key={che.ItemID} value={che.ItemID}>
                                                         {che.ItemName}
                                                     </option>
                                                 )}
-                                            </select>  
+                                            </select>
                                         </div>
-                  
 
-                                      
 
-                             </div>
-                         </div>
-                                 <div>
+
+
+                                    </div>
+                                </div>
+                                <div>
                                     {CheckoutId === 0 ?
                                         <button type="button"
                                             className="btn btn-primary float-start"
@@ -480,53 +445,61 @@ return (
                                         >Update</button>
                                         : null}
                                 </div>
-                     </div>
-                 </div>
-             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                   
-             <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-hidden="true">
+
+
+                <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog moadal-lg modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">{modalTitle}</h5>
-                                <button type="button" className="btl-close" data-bs-dismiss="modal2" aria-label="close">
+                                <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
                                 </button>
                             </div>
-                               <div className="input-group mb-3">
+
+                            <div className="modal-body">
+                                <div className="d-flex flex-row bd-highlight mb-3">
+                                    <div className="p-2 w-100 bd-highlight">
+                                        <div className="input-group mb-3">
                                             <span className="input-group-text">User Signature</span>
                                             <input type="text" className="form-control"
                                                 value={UserSignature}
                                                 onChange={this.changeUserSignature} />
-                                        </div>   
+                                        </div>
+                                    </div>
+                                </div>
 
-                                              <div>
-                                    {CheckinId === 0 ?
-                                        <button type="button"
-                                            className="btn btn-primary float-start"
-                                            onClick={() => this.createClickCheckin()}
-                                        >Create</button>
-                                        : null}
+                                    <div>
+                                        {CheckinId === 0 ?
+                                            <button type="button"
+                                                className="btn btn-primary float-start"
+                                                onClick={() => this.createClickCheckin()}
+                                            >Create</button>
+                                            : null}
 
-                                    {CheckinId !== 0 ?
-                                        <button type="button"
-                                            className="btn btn-primary float-start"
-                                            onClick={() => this.updateClickCheckin()}
-                                        >Update</button>
-                                        : null}
-                                </div>          
+                                        {CheckinId !== 0 ?
+                                            <button type="button"
+                                                className="btn btn-primary float-start"
+                                                onClick={() => this.updateClickCheckin()}
+                                            >Update</button>
+                                            : null}
+                                    </div>
+                            </div>
 
-                            </div>
-                            </div>
-                            </div>
-        </div>
-        </div>
-     )
-     }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
-                        
-              
+
+
 
 
 
