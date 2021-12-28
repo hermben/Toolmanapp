@@ -165,7 +165,6 @@ export class Items extends Component {
             Items,
             ItemTypes,
             modalTitle,
-            ItemType,
             ItemId,
             ItemName,
             ItemSerial,
