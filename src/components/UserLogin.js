@@ -7,7 +7,7 @@ export class UserLogin extends Component {
                 <li className="nav-item M-1">
                     <div className="dropdown">
                         <a className="btn btn-light btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        {this.props.auth.user.name}
+                            {this.props.auth.user.name}
                         </a>
 
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">

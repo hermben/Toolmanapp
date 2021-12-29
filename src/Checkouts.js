@@ -19,14 +19,12 @@ export class Checkouts extends Component {
             ItemType: 0,
             ItemId: 0,
             ItemName: "",
-            UserId: 0,
-            UserName: "",
+            UserName: this.props.auth.user.name,
+            UserEmail: this.props.auth.user.userName,
             IsCheckin: false,
             ItemTypeId: 0,
             UserSignature: "",
             CheckinId: 0
-
-
         }
     }
 
@@ -56,10 +54,6 @@ export class Checkouts extends Component {
         this.refreshList();
     }
 
-    changeUserName = (e) => {
-        this.setState({ UserId: e.target.value });
-    }
-
     changeUserSignature = (e) => {
         this.setState({ UserSignature: e.target.value });
     }
@@ -79,8 +73,6 @@ export class Checkouts extends Component {
             ItemType: 0,
             ItemId: 0,
             ItemName: "",
-            UserId: 0,
-            UserName: "",
             IsCheckin: false,
             ItemTypeId: 0
         });
@@ -92,7 +84,6 @@ export class Checkouts extends Component {
             modalTitle: "Add Checkins",
             CheckinId: 0,
             CheckinTime: 0,
-            UserId: ch.UserID,
             ItemId: ch.ItemID,
             CheckoutId: ch.CheckoutID,
         });
@@ -103,27 +94,19 @@ export class Checkouts extends Component {
         this.setState({
             modalTitle: "edit Checkouts",
             CheckoutTime: ch.CheckoutTime,
-            Userid: ch.UserID,
-            UserName: ch.UserName,
             ItemId: ch.ItemID,
             ItemName: ch.ItemName,
             IsCheckin: ch.IsCheckin,
+            CheckoutId: ch.CheckoutID,
         });
     }
 
-    UserIdIsValid() {
-        return this.state.UserId !== 0;
-    }
     ItemIdIsValide() {
 
         return this.state.ItemId !== 0;
     }
 
     createClick() {
-        if (!this.UserIdIsValid()) {
-            alert("Please select a user");
-            return;
-        }
         if (!this.ItemIdIsValide()) {
             alert("Please Select an Item");
             return;
@@ -136,8 +119,9 @@ export class Checkouts extends Component {
                 'content-Type': 'application/json'
             },
             body: JSON.stringify({
-                UserID: this.state.UserId,
-                ItemID: this.state.ItemId,
+                UserName: this.state.UserName,
+                UserEmail: this.state.UserEmail,
+                ItemID: this.state.ItemId
             })
         })
             .then(res => res.json())
@@ -154,8 +138,6 @@ export class Checkouts extends Component {
         this.setState({
             modalTitle2: "edit Checkins",
             CheckinTime: ch.CheckinTime,
-            Userid: ch.UserID,
-            UserName: ch.UserName,
             ItemId: ch.ItemID,
             ItemName: ch.ItemName,
             IsCheckin: ch.IsCheckin,
@@ -181,7 +163,8 @@ export class Checkouts extends Component {
                 CheckinID: this.state.CheckinId,
                 UserSignature: this.state.UserSignature,
                 CheckoutID: this.state.CheckoutId,
-                UserID: this.state.UserId
+                UserName: this.state.UserName, 
+                UserEmail: this.state.UserEmail
             })
         })
             .then(res => res.json())
@@ -206,7 +189,8 @@ export class Checkouts extends Component {
                 CheckinID: this.state.CheckinId,
                 UserSignature: this.state.UserSignature,
                 CheckoutID: this.state.CheckoutId,
-                UserID: this.state.UserId
+                UserName: this.state.UserName,
+                UserEmail: this.state.UserEmail
 
             })
         })
@@ -241,7 +225,7 @@ export class Checkouts extends Component {
 
 
     updateClick() {
-        fetch(variables.API_URL + 'Items', {
+        fetch(variables.API_URL + 'Checkouts', {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -249,9 +233,10 @@ export class Checkouts extends Component {
 
             },
             body: JSON.stringify({
-                UserID: this.state.UserId,
+                UserName: this.state.UserName,
+                UserEmail: this.state.UserEmail,
                 ItemID: this.state.ItemId,
-
+                CheckoutID: this.state.CheckoutId
             })
         })
             .then(res => res.json())
@@ -294,8 +279,8 @@ export class Checkouts extends Component {
             ItemType,
             ItemId,
             ItemName,
-            UserId,
             UserName,
+            UserEmail,
             IsCheckin,
             ItemTypeId,
             Users,
@@ -339,7 +324,7 @@ export class Checkouts extends Component {
                     <tbody>
                         {Checkouts.map(ch =>
                             <tr key={ch.CheckoutID}>
-                                <td>{ch.Name}</td>
+                                <td>{ch.UserName}</td>
                                 <td>{ch.CheckoutTime}</td>
                                 <td>{ch.ItemName}</td>
                                 <td>{ch.CheckinTime}</td>
@@ -393,7 +378,7 @@ export class Checkouts extends Component {
 
                                     <div className="p-2 w-100 bd-highlight">
 
-                                        <div className="input-group mb-3">
+                                        {/* <div className="input-group mb-3">
                                             <span className="input-group-text">User Name</span>
                                             <select className="form-select"
                                                 onChange={this.changeUserName}
@@ -407,7 +392,7 @@ export class Checkouts extends Component {
                                                     </option>
                                                 )}
                                             </select>
-                                        </div>
+                                        </div> */}
 
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Item </span>

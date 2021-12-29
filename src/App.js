@@ -117,8 +117,6 @@ export class App extends Component {
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <li><Link className="dropdown-item" to="/items">Items</Link></li>
                       <li><Link className="dropdown-item" to="/itemTypes">Item types</Link></li>
-                      <li><Link className="dropdown-item" to="/users">Users</Link></li>
-                      {/* <UserLogin {...this.props} /> */}
                     </ul>
                   </div>
                 </li>
@@ -130,8 +128,7 @@ export class App extends Component {
 
             <Routes>
               <Route exact path="/home" element={<Home />} />
-              <Route exact path="/users" element={<Users />} />
-              <Route exact path="/Checkouts" element={<Checkouts />} />
+              <Route exact path="/Checkouts" element={<Checkouts auth={this.state} />} />
               <Route exact path="/Items" element={<Items />} />
               <Route exact path="/ItemTypes" element={<ItemTypes />} />
 
