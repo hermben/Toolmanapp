@@ -1,10 +1,8 @@
 import './App.css';
 import { Home } from './Home';
-import { Users } from './Users';
 import { Items } from './Items';
 import { ItemTypes } from './ItemTypes';
 import { Checkouts } from './Checkouts';
-import { withAuth } from './msal/MsalAuthProvider';
 import { BrowserRouter, Route, Routes, NavLink, Link } from 'react-router-dom';
 import { UserLogin } from './components/UserLogin';
 import React, { Component } from 'react';
@@ -110,9 +108,9 @@ export class App extends Component {
                 
                 <li className="nav-item M-1">
                   <div className="dropdown">
-                    <a className="btn btn-light btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="btn btn-light btn-outline-primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                       Menu
-                    </a>
+                    </button>
 
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <li><Link className="dropdown-item" to="/items">Items</Link></li>

@@ -13,7 +13,6 @@ export class Checkouts extends Component {
             Users: [],
             ItemTypes: [],
             modalTitle: "",
-            modalTitle: "",
             CheckoutId: 0,
             CheckoutTime: 0,
             ItemType: 0,
@@ -60,10 +59,6 @@ export class Checkouts extends Component {
     changeItemName = (e) => {
         this.setState({ ItemId: e.target.value });
     }
-
-    // changeIsCheckout = (e) => {
-    //     this.setState({ IsCheckin: e.target.value === "1" ? false : true });
-    // }
 
     addClick() {
         this.setState({
@@ -134,19 +129,10 @@ export class Checkouts extends Component {
 
     }
 
-    editClickCheckin(ch) {
-        this.setState({
-            modalTitle2: "edit Checkins",
-            CheckinTime: ch.CheckinTime,
-            ItemId: ch.ItemID,
-            ItemName: ch.ItemName,
-            IsCheckin: ch.IsCheckin,
-        });
-    }
-
     UserSignIsValid() {
         return this.state.UserSignature !== 0;
     }
+
     createClickCheckin() {
         if (!this.UserSignIsValid()) {
             alert("Please enter you initials");
@@ -176,53 +162,6 @@ export class Checkouts extends Component {
             })
 
     }
-
-    updateClickCheckin() {
-        fetch(variables.API_URL + 'checkouts', {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'content-Type': 'application/json'
-
-            },
-            body: JSON.stringify({
-                CheckinID: this.state.CheckinId,
-                UserSignature: this.state.UserSignature,
-                CheckoutID: this.state.CheckoutId,
-                UserName: this.state.UserName,
-                UserEmail: this.state.UserEmail
-
-            })
-        })
-            .then(res => res.json())
-            .then((result) => {
-                alert(result);
-                this.refreshList();
-            }, (error) => {
-                alert('Failed');
-            });
-
-    }
-
-    deleteClickCheckin(id) {
-        if (window.confirm('Are you sure?')) {
-            fetch(variables.API_URL + 'Checkins/' + id, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'content-Type': 'application/json'
-                }
-            })
-                .then(res => res.json())
-                .then((result) => {
-                    alert(result);
-                    this.refreshList();
-                }, (error) => {
-                    alert('Failed');
-                })
-        }
-    }
-
 
     updateClick() {
         fetch(variables.API_URL + 'Checkouts', {
@@ -272,18 +211,9 @@ export class Checkouts extends Component {
     render() {
         const {
             modalTitle,
-            modalTitle2,
             CheckoutId,
-            CheckoutTime,
             Checkouts,
-            ItemType,
             ItemId,
-            ItemName,
-            UserName,
-            UserEmail,
-            IsCheckin,
-            ItemTypeId,
-            Users,
             Items,
             UserSignature,
             CheckinId

@@ -6,16 +6,16 @@ export class UserLogin extends Component {
             return (
                 <li className="nav-item M-1">
                     <div className="dropdown">
-                        <a className="btn btn-light btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="btn btn-light btn-outline-primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             {this.props.auth.user.name}
-                        </a>
+                        </button>
 
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             {/* <UserLogin {...this.props} /> */}
                             <li>
-                                <a className="dropdown-item" onClick={this.props.onSignOut} href='#'>
+                                <button className="dropdown-item" onClick={this.props.onSignOut}>
                                     Logout
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -25,9 +25,9 @@ export class UserLogin extends Component {
         else {
             return (
                 <li className="nav-item M-1">
-                    <a className="btn btn-light btn-outline-primary" onClick={this.props.onSignIn}>
+                    <button className="btn btn-light btn-outline-primary" onClick={this.props.onSignIn}>
                         Login
-                    </a>
+                    </button>
                 </li>
             );
         }
