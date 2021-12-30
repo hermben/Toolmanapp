@@ -1,70 +1,82 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- About this Project -->
+## About the Project
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+Installation Instructions
+1.) Do a fork and clone of the repo to your local machine.
+2.) Navigate to the client directory and run npm install.
+3.) Move to the project root directory and run dotnet watch run.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+Built with
+•	Back-End
+o	ASP.NET Core 3.1
+o	MS Sql
+•	Front-End
+o	React.js
+o	Bootstrap
+o	Azure AD login
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- Installation -->
+##Installation
 
-### `npm run build`
+###Database Installation
+1.	Please download the database file provided in this link and use the restore Database function of Microsoft SQL server to install the database.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+/…….
+2.	Run MSSql server service 
+3.	Use windows authentication service for database.
+3. Get the connection string to the database.
+	a- once your are done intalling the database, from visual studio open Server explorer
+    b- 	select icon Sql server object explorer then select add SQL server.
+	c Browse your local directory, open the one with you computer name and connect using windows Authentication.
+    d- under SQL server Object Explorer , you can now open a drop down with your laptop name and see all database
+	e - select datatoolDB and right click on properties where you can copy the connection string for the database 
+	d copy the connection string in your backend application file name appsettings.json under connection strings
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+###Backend Installation
+1 Clone the repo
+   ```sh
+   git clone https://github.com/hermben/ToolManagementApp
+   ```
+Preferably using visual studio 2019
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+###React front end installation
+1 Clone the repo
+ ```sh
+   git clone https://github.com/hermben/Toolmanapp
+   ```
+Preferably using Visual studio code.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    
+2.	Install NPM Package
+    ```sh
+    Run NPM install 
+    ```sh
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3.	Run NPM start
+     ```sh
+ 
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services.
+1.	Get a free API Key at https://example.com
+2.	Clone the repo
+git clone https://github.com/your_username_/Project-Name.git
+3.	Install NPM packages
+npm install
+4.	Enter your API in config.js
+const API_KEY = 'ENTER YOUR API';
 
-### Code Splitting
+Author
+•	Herman Benao Microsoft Software developer Leap program .
+License 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Distributed under the MIT License. See LICENSE.txt for more information.

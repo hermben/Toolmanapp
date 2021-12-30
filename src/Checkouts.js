@@ -121,7 +121,7 @@ export class Checkouts extends Component {
         })
             .then(res => res.json())
             .then((result) => {
-                alert(result);
+                // alert(result);
                 this.refreshList();
             }, (error) => {
                 alert('Failed');
@@ -207,7 +207,6 @@ export class Checkouts extends Component {
         }
     }
 
-
     render() {
         const {
             modalTitle,
@@ -255,20 +254,23 @@ export class Checkouts extends Component {
                         {Checkouts.map(ch =>
                             <tr key={ch.CheckoutID}>
                                 <td>{ch.UserName}</td>
-                                <td>{ch.CheckoutTime}</td>
+                                <td>{ch.CheckoutTime ? (new Date(ch.CheckoutTime)).toLocaleString('en-US') : null}</td>
                                 <td>{ch.ItemName}</td>
-                                <td>{ch.CheckinTime}</td>
+                                <td>{ch.CheckinTime ? (new Date(ch.CheckinTime)).toLocaleString('en-US') : null}</td>
                                 <td>{ch.UserSignature}</td>
                                 <td>
-                                    <button type="button"
-                                        className="btn btn-light m-1"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal2"
-                                        onClick={() => this.addClickCheckin(ch)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-right-square" viewBox="0 0 16 16">
-                                            <path fillrule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z" />
-                                        </svg>
-                                    </button>
+                                {ch.IsCheckin === 0 ? 
+                                        <button type="button"
+                                            className="btn btn-light m-1"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal2"
+                                            onClick={() => this.addClickCheckin(ch)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-right-square" viewBox="0 0 16 16">
+                                                <path fillrule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z" />
+                                            </svg>
+                                        </button>
+                                        : null
+                                    }
 
                                     <button type="button"
                                         className="btn btn-light mrv-1"
@@ -281,13 +283,17 @@ export class Checkouts extends Component {
                                         </svg>
                                     </button>
 
-                                    <button type="button"
-                                        className="btn btn-light mr-1"
-                                        onClick={() => this.deleteClick(ch.CheckoutID)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
-                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                        </svg>
-                                    </button>
+                                    {ch.IsCheckin === 0 ? 
+                                        <button type="button"
+                                            className="btn btn-light mr-1"
+                                            onClick={() => this.deleteClick(ch.CheckoutID)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                            </svg>
+                                        </button>
+                                        : null
+                                    }
+                                    
                                 </td>
                             </tr>
                         )}
@@ -348,7 +354,8 @@ export class Checkouts extends Component {
                                 <div>
                                     {CheckoutId === 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start"
+                                            className="btn btn-primary float-start btl-close"
+                                            data-bs-dismiss="modal" aria-label="close"
                                             onClick={() => this.createClick()}
                                         >Create</button>
                                         : null}
@@ -364,8 +371,6 @@ export class Checkouts extends Component {
                         </div>
                     </div>
                 </div>
-
-
 
                 <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog moadal-lg modal-dialog-centered">
