@@ -32,7 +32,8 @@ Built with
 1. Clone the repo
    ```sh
    git clone https://github.com/hermben/ToolManagementApp
-Preferably using visual studio 2019
+   ```
+   Preferably using visual studio 2019
 
 2. Add connection string copied from previews step in appsettings.json under **ConnectionStrings.dataToolDB**
 3. Run your backend application from Visual Studio with the green play button **IIS Express**
@@ -41,21 +42,23 @@ Preferably using visual studio 2019
 
 ### React front end installation
 1. Clone the front-end project from repo
- ```sh
+   ```sh
    git clone https://github.com/hermben/Toolmanapp
    ```
-Preferably using Visual Studio Code.
+   Preferably using Visual Studio Code.
 
     
 2.	Install NPM Packages
 Run
     ```sh
     npm install 
+    ```
     
 
 3.	Start the front-end application by running 
 	```sh
 	npm start
+	```
  
 
 ### Author
