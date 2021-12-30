@@ -2,8 +2,39 @@
 <!-- About this Project -->
 ## About the Project
 
-Built with
 
+### What problem does your project solve? 
+
+  
+
+Initially Quincy datacenter uses handwritten paper sheet for signing out equipment and tools that are meant to be shared. for example, expensive network devices, special tools, USB drive, specific access keys.  
+
+Hand paper sheet are difficult to maintain manage and store especially overtime 
+
+Constant typos make it hard to audit such documents 
+
+Any error or typo requires the auditor to refill all the information on the sheet and reach out to FTEs on the sheet for validation which increases drastically audit resolution time. 
+
+  
+
+### How does it solve the problem? 
+
+  
+Creating an application to replace handwritten paper sheet will solve the following issue 
+
+No need to maintain, manage and store handwritten paper sheet. Everything is securely stored in the cloud 
+
+No more typos that make it difficult to audit. Implementing required fields on the form eliminates the possibility of errors. 
+
+Facilitate audits by allowing a more streamlined process with predefined selectable texted and images. 
+
+Faster filling, since check-in, checkout dates and equipment names are prefilled. 
+
+Facilitate access to documents by management for compliance requirements.  
+
+Facilitate archiving and retrieving old documents. 
+
+### Built with
 
 -	Back-End
 	-	ASP.NET Core 3.1
@@ -17,8 +48,8 @@ Built with
 ## Installation
 
 ### Database Installation
-1.	Please download the database file [datatoolDB](https://github.com/hermben/ToolManagementApp/raw/master/datatoolDB) provided in the backend file project and use the restore Database function of Microsoft SQL server to install the database.
-2.	Run MSSql server service 
+1.	Run MSSql server service 
+2.	Please download the database file [datatoolDB](https://github.com/hermben/ToolManagementApp/raw/master/datatoolDB) provided in the backend file project and use the restore Database function of Microsoft SQL Server Managment Studio to install the database.
 3.	Use windows authentication service for database.
 4.	Get the connection string to the database.
 	-	once your are done intalling the database, from visual studio open Server explorer
