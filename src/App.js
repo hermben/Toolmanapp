@@ -1,13 +1,12 @@
 import './App.css';
 import { Home } from './Home';
-import { Items } from './Items';
-import { ItemTypes } from './ItemTypes';
-import { Checkouts } from './Checkouts';
+import { Items } from './components/Items';
+import { ItemTypes } from './components/ItemTypes';
+import { Checkouts } from './components/Checkouts';
 import { BrowserRouter, Route, Routes, NavLink, Link } from 'react-router-dom';
 import { UserLogin } from './components/UserLogin';
 import React, { Component } from 'react';
 import { UserAgentApplication } from 'msal';
-
 import { msalConfig } from './msal/MsalConfig';
 
 
@@ -17,7 +16,6 @@ export const msalAuth = new UserAgentApplication({
 
 
 export class App extends Component {
-
 
   constructor(props) {
     super(props);
@@ -30,7 +28,6 @@ export class App extends Component {
       errorMessage: null
     };
   }
-
 
   async componentWillMount() {
     msalAuth.handleRedirectCallback(() => {
@@ -70,7 +67,6 @@ export class App extends Component {
     }
   }
 
-
   onSignIn() {
     msalAuth.loginRedirect({});
   }
@@ -91,8 +87,6 @@ export class App extends Component {
             <h3 className="d-flex justify-content-center m-3">
               React JS Frontend
             </h3>
-
-
             <nav className="navbar navbar-expand-sm bg-light navbar-dark">
               <ul className="navbar-nav">
                 <li className="nav-item M-1">
@@ -105,22 +99,18 @@ export class App extends Component {
                     Checkouts
                   </NavLink>
                 </li>
-                
                 <li className="nav-item M-1">
                   <div className="dropdown">
                     <button className="btn btn-light btn-outline-primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                       Menu
                     </button>
-
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <li><Link className="dropdown-item" to="/items">Items</Link></li>
                       <li><Link className="dropdown-item" to="/itemTypes">Item types</Link></li>
                     </ul>
                   </div>
                 </li>
-
                 <UserLogin auth={this.state} onSignIn={() => this.onSignIn()} onSignOut={() => this.onSignOut()}/>
-
               </ul>
             </nav>
 
@@ -129,14 +119,11 @@ export class App extends Component {
               <Route exact path="/Checkouts" element={<Checkouts auth={this.state} />} />
               <Route exact path="/Items" element={<Items />} />
               <Route exact path="/ItemTypes" element={<ItemTypes />} />
-
             </Routes>
           </div>
         </BrowserRouter >
       );
     }
-
-
 
     if (this.state.hasError) {
       return <div>{this.state.errorMessage}</div>;

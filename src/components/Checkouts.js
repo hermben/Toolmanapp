@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { variables } from './Variables';
+import { variables } from '../Variables';
 
 export class Checkouts extends Component {
 
@@ -35,12 +35,14 @@ export class Checkouts extends Component {
                 this.setState({ Checkouts: data });
                 console.log(data);
             });
+
         fetch(variables.API_URL + 'Users')
             .then(response => response.json())
             .then(data => {
                 this.setState({ Users: data });
                 console.log(data);
             });
+
         fetch(variables.API_URL + 'Items')
             .then(response => response.json())
             .then(data => {
@@ -82,7 +84,6 @@ export class Checkouts extends Component {
             ItemId: ch.ItemID,
             CheckoutId: ch.CheckoutID,
         });
-
     }
 
     editClick(ch) {
@@ -149,7 +150,7 @@ export class Checkouts extends Component {
                 CheckinID: this.state.CheckinId,
                 UserSignature: this.state.UserSignature,
                 CheckoutID: this.state.CheckoutId,
-                UserName: this.state.UserName, 
+                UserName: this.state.UserName,
                 UserEmail: this.state.UserEmail
             })
         })
@@ -169,7 +170,6 @@ export class Checkouts extends Component {
             headers: {
                 'Accept': 'application/json',
                 'content-Type': 'application/json'
-
             },
             body: JSON.stringify({
                 UserName: this.state.UserName,
@@ -219,6 +219,9 @@ export class Checkouts extends Component {
         } = this.state;
         return (
             <div>
+                <div>
+                    <h4> Checkouts </h4>
+                </div>
                 <button type="button"
                     className="btn btn-primary m-2 float-end"
                     data-bs-toggle="modal"
@@ -259,7 +262,7 @@ export class Checkouts extends Component {
                                 <td>{ch.CheckinTime ? (new Date(ch.CheckinTime)).toLocaleString('en-US') : null}</td>
                                 <td>{ch.UserSignature}</td>
                                 <td>
-                                {ch.IsCheckin === 0 ? 
+                                    {ch.IsCheckin === 0 ?
                                         <button type="button"
                                             className="btn btn-light m-1"
                                             data-bs-toggle="modal"
@@ -283,7 +286,7 @@ export class Checkouts extends Component {
                                         </svg>
                                     </button>
 
-                                    {ch.IsCheckin === 0 ? 
+                                    {ch.IsCheckin === 0 ?
                                         <button type="button"
                                             className="btn btn-light mr-1"
                                             onClick={() => this.deleteClick(ch.CheckoutID)}>
@@ -293,7 +296,7 @@ export class Checkouts extends Component {
                                         </button>
                                         : null
                                     }
-                                    
+
                                 </td>
                             </tr>
                         )}
@@ -314,22 +317,6 @@ export class Checkouts extends Component {
 
                                     <div className="p-2 w-100 bd-highlight">
 
-                                        {/* <div className="input-group mb-3">
-                                            <span className="input-group-text">User Name</span>
-                                            <select className="form-select"
-                                                onChange={this.changeUserName}
-                                                value={UserId}>
-                                                <option value={0}>
-                                                    Please Select a User
-                                                </option>
-                                                {Users.map(chk =>
-                                                    <option key={chk.UserID} value={chk.UserID}>
-                                                        {chk.Name}
-                                                    </option>
-                                                )}
-                                            </select>
-                                        </div> */}
-
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Item </span>
                                             <select className="form-select"
@@ -345,10 +332,6 @@ export class Checkouts extends Component {
                                                 )}
                                             </select>
                                         </div>
-
-
-
-
                                     </div>
                                 </div>
                                 <div>
@@ -393,28 +376,28 @@ export class Checkouts extends Component {
                                     </div>
                                 </div>
 
-                                    <div>
-                                        {CheckinId === 0 ?
-                                            <button type="button"
-                                                className="btn btn-primary float-start"
-                                                onClick={() => this.createClickCheckin()}
-                                            >Create</button>
-                                            : null}
+                                <div>
+                                    {CheckinId === 0 ?
+                                        <button type="button"
+                                            className="btn btn-primary float-start"
+                                            onClick={() => this.createClickCheckin()}
+                                        >Create</button>
+                                        : null}
 
-                                        {CheckinId !== 0 ?
-                                            <button type="button"
-                                                className="btn btn-primary float-start"
-                                                onClick={() => this.updateClickCheckin()}
-                                            >Update</button>
-                                            : null}
-                                    </div>
+                                    {CheckinId !== 0 ?
+                                        <button type="button"
+                                            className="btn btn-primary float-start"
+                                            onClick={() => this.updateClickCheckin()}
+                                        >Update</button>
+                                        : null}
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        )
+
+        );
     }
 }
 

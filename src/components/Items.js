@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { variables } from './Variables';
+import { variables } from '../Variables';
 
 export class Items extends Component {
 
@@ -8,14 +8,14 @@ export class Items extends Component {
 
         this.state = {
             Items: [],
-            ItemTypes:[],
+            ItemTypes: [],
             modalTitle: "",
-            ItemType:"",
+            ItemType: "",
             ItemId: 0,
             ItemName: "",
             ItemSerial: "",
             ItemDescription: "",
-            IsCheckout: false ,
+            IsCheckout: false,
             ItemTypeId: 0
         }
     }
@@ -25,15 +25,15 @@ export class Items extends Component {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                this.setState({ Items:data });
+                this.setState({ Items: data });
                 console.log(data);
             });
-        fetch(variables.API_URL+ 'ItemTypes')
-          .then(response=> response.json())
-          .then(data=>{
-              this.setState({ItemTypes: data});
-              console.log(data);
-          });    
+        fetch(variables.API_URL + 'ItemTypes')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ ItemTypes: data });
+                console.log(data);
+            });
     }
 
     componentDidMount() {
@@ -54,18 +54,18 @@ export class Items extends Component {
     changeIsCheckout = (e) => {
         this.setState({ IsCheckout: e.target.value === "1" ? true : false });
     }
-   
+
 
     addClick() {
         this.setState({
             modalTitle: "Add Items",
-            ItemType:"",
+            ItemType: "",
             ItemId: 0,
             ItemName: "",
             ItemSerial: "",
             ItemDescription: "",
-            IsCheckout: false, 
-            ItemTypeId:0
+            IsCheckout: false,
+            ItemTypeId: 0
         });
     }
 
@@ -73,12 +73,12 @@ export class Items extends Component {
     editClick(it) {
         this.setState({
             modalTitle: "edit Items",
-            ItemType:it.ItemType,
-            ItemId:it.ItemID,
+            ItemType: it.ItemType,
+            ItemId: it.ItemID,
             ItemName: it.ItemName,
-            ItemSerial:it.ItemSerial,
-            ItemDescription:it.ItemDescription,
-            IsCheckout:it.IsCheckout,
+            ItemSerial: it.ItemSerial,
+            ItemDescription: it.ItemDescription,
+            IsCheckout: it.IsCheckout,
             ItemTypeId: it.ItemTypeID
         });
     }
@@ -93,12 +93,12 @@ export class Items extends Component {
             },
             body: JSON.stringify({
 
-                ItemID:this.state.ItemId,
-                ItemTypeID:this.state.ItemTypeId,
-                ItemName:this.state.ItemName,
-                ItemSerial:this.state.ItemSerial,
-                ItemDescription:this.state.ItemDescription,
-                IsCheckout:this.state.IsCheckout
+                ItemID: this.state.ItemId,
+                ItemTypeID: this.state.ItemTypeId,
+                ItemName: this.state.ItemName,
+                ItemSerial: this.state.ItemSerial,
+                ItemDescription: this.state.ItemDescription,
+                IsCheckout: this.state.IsCheckout
             })
         })
             .then(res => res.json())
@@ -120,32 +120,31 @@ export class Items extends Component {
 
             },
             body: JSON.stringify({
-                ItemTypeID:this.state.ItemTypeId,
-                ItemID:this.state.ItemId,
-                ItemName:this.state.ItemName,
-                ItemSerial:this.state.ItemSerial,
-                ItemDescription:this.state.ItemDescription,
-                IsCheckout:this.state.IsCheckout
-            })   
+                ItemTypeID: this.state.ItemTypeId,
+                ItemID: this.state.ItemId,
+                ItemName: this.state.ItemName,
+                ItemSerial: this.state.ItemSerial,
+                ItemDescription: this.state.ItemDescription,
+                IsCheckout: this.state.IsCheckout
+            })
         })
-        .then(res => res.json())
-        .then((result) => {
-            alert(result);
-            this.refreshList();
-        }, (error) => {
-            alert('Failed');
-        });
+            .then(res => res.json())
+            .then((result) => {
+                alert(result);
+                this.refreshList();
+            }, (error) => {
+                alert('Failed');
+            });
 
     }
 
-    deleteClick(id){
-        if(window.confirm('Are you sure?')) 
-        {
+    deleteClick(id) {
+        if (window.confirm('Are you sure?')) {
             fetch(variables.API_URL + 'Items/' + id, {
                 method: 'DELETE',
                 headers: {
-                    'Accept':'application/json',
-                    'content-Type':'application/json'
+                    'Accept': 'application/json',
+                    'content-Type': 'application/json'
                 }
             })
                 .then(res => res.json())
@@ -154,12 +153,10 @@ export class Items extends Component {
                     this.refreshList();
                 }, (error) => {
                     alert('Failed');
-                })  
+                })
         }
     }
 
-
-   
     render() {
         const {
             Items,
@@ -174,6 +171,11 @@ export class Items extends Component {
         } = this.state;
         return (
             <div>
+
+                <div>
+                    <h4> Items </h4>
+                </div>
+
                 <button type="button"
                     className="btn btn-primary m-2 float-end"
                     data-bs-toggle="modal"
@@ -185,7 +187,7 @@ export class Items extends Component {
                     <thead>
                         <tr>
                             <th>
-                                Item Type 
+                                Item Type
                             </th>
                             <th>
                                 Name
@@ -194,7 +196,7 @@ export class Items extends Component {
                                 Serial
                             </th>
                             <th>
-                               Description
+                                Description
                             </th>
                             <th>
                                 Is Checkout
@@ -228,10 +230,8 @@ export class Items extends Component {
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                         </svg>
                                     </button>
-
                                 </td>
                             </tr>
-
                         )}
 
                     </tbody>
@@ -255,12 +255,12 @@ export class Items extends Component {
                                             <select className="form-select"
                                                 onChange={this.changeItemType}
                                                 value={ItemTypeId}>
-                                                {ItemTypes.map(ity=>
+                                                {ItemTypes.map(ity =>
                                                     <option key={ity.ItemTypeID} value={ity.ItemTypeID}>
                                                         {ity.ItemTypeName}
                                                     </option>
                                                 )}
-                                            </select>  
+                                            </select>
                                         </div>
 
                                         <div className="input-group mb-3">
@@ -305,8 +305,6 @@ export class Items extends Component {
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
 
                                 <div>
@@ -330,7 +328,6 @@ export class Items extends Component {
                     </div>
                 </div>
             </div>
-        )
-
+        );
     }
 }

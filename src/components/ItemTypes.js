@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { variables } from './Variables';
+import { variables } from '../Variables';
 
 export class ItemTypes extends Component {
 
@@ -11,7 +11,6 @@ export class ItemTypes extends Component {
             modalTitle: "",
             itemTypeId: "",
             itemTypeName: "",
-           
         }
     }
 
@@ -30,7 +29,7 @@ export class ItemTypes extends Component {
     }
 
     changeitemTypeName = (e) => {
-        this.setState({itemTypeName: e.target.value});
+        this.setState({ itemTypeName: e.target.value });
     }
 
     addClick() {
@@ -41,7 +40,6 @@ export class ItemTypes extends Component {
         });
     }
 
-
     editClick(ty) {
         this.setState({
             modalTitle: "edit ItemTypes",
@@ -50,68 +48,64 @@ export class ItemTypes extends Component {
         });
     }
 
-    createClick(){
-        fetch(variables.API_URL+'ItemTypes',{
-            method:'POST',
-            headers:{
+    createClick() {
+        fetch(variables.API_URL + 'ItemTypes', {
+            method: 'POST',
+            headers: {
                 'Accept': 'application/json',
-                'content-Type':'application/json'
-
+                'content-Type': 'application/json'
             },
-             body:JSON.stringify({
-                itemTypeName:this.state.itemTypeName
+            body: JSON.stringify({
+                itemTypeName: this.state.itemTypeName
             })
         })
-        .then(res=>res.json())
-        .then((result)=>{
-            alert(result);
-            this.refreshList();
-        },(error)=>{
-            alert('Failed');
-        })
-
-    }
-
-    updateClick(){
-        fetch(variables.API_URL+'ItemTypes',{
-            method:'PUT',
-            headers:{
-                'Accept': 'application/json',
-                'content-Type':'application/json'
-
-            },
-             body:JSON.stringify({
-                itemTypeId:this.state.itemTypeId,
-                itemTypeName:this.state.itemTypeName
-            })
-        })
-        .then(res=>res.json())
-        .then((result)=>{
-            alert(result);
-            this.refreshList();
-        },(error)=>{
-            alert('Failed');
-        })
-
-    }
-
-    deleteClick(id){
-        if(window.confirm('Are you sure?')){
-            fetch(variables.API_URL+'ItemTypes/'+id,{
-                method:'DELETE',
-                headers:{
-                    'Accept': 'application/json',
-                    'content-Type':'application/json'
-
-                }
-            })
-            .then(res=>res.json())
-            .then((result)=>{
+            .then(res => res.json())
+            .then((result) => {
                 alert(result);
                 this.refreshList();
-            },(error)=>{
+            }, (error) => {
                 alert('Failed');
             })
+    }
+
+    updateClick() {
+        fetch(variables.API_URL + 'ItemTypes', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'content-Type': 'application/json'
+
+            },
+            body: JSON.stringify({
+                itemTypeId: this.state.itemTypeId,
+                itemTypeName: this.state.itemTypeName
+            })
+        })
+            .then(res => res.json())
+            .then((result) => {
+                alert(result);
+                this.refreshList();
+            }, (error) => {
+                alert('Failed');
+            })
+    }
+
+    deleteClick(id) {
+        if (window.confirm('Are you sure?')) {
+            fetch(variables.API_URL + 'ItemTypes/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then((result) => {
+                    alert(result);
+                    this.refreshList();
+                }, (error) => {
+                    alert('Failed');
+                })
         }
     }
 
@@ -126,6 +120,9 @@ export class ItemTypes extends Component {
         } = this.state;
         return (
             <div>
+                <div>
+                    <h4> ItemTypes </h4>
+                </div>
                 <button type="button"
                     className="btn btn-primary m-2 float-end"
                     data-bs-toggle="modal"
@@ -137,7 +134,7 @@ export class ItemTypes extends Component {
                     <thead>
                         <tr>
                             <th>
-                               itemTypeId
+                                itemTypeId
                             </th>
                             <th>
                                 itemTypeName
@@ -166,15 +163,14 @@ export class ItemTypes extends Component {
 
                                     <button type="button"
                                         className="btn btn-light mr-1"
-                                        onClick={()=>this.deleteClick(ty.ItemTypeID)}>
+                                        onClick={() => this.deleteClick(ty.ItemTypeID)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
-                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                         </svg>
                                     </button>
 
                                 </td>
                             </tr>
-
                         )}
 
                     </tbody>
@@ -187,46 +183,37 @@ export class ItemTypes extends Component {
                                 <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
                                 </button>
                             </div>
-                        <div className="modal-body">
-                             <div className="d-flex flex-row bd-highlight mb-3">
+                            <div className="modal-body">
+                                <div className="d-flex flex-row bd-highlight mb-3">
 
-                                 <div className="p-2 w-50 bd-highlight">
-                                   <div className="input-group mb-3">
-                                    <span className="input-group-text">itemTypeName</span>
-                                    <input type="text" className="form-control"
-                                        value={itemTypeName}
-                                        onChange={this.changeitemTypeName}/>
-                                </div>
-                                </div>
-                               
-                                {itemTypeId===0?
-                                <button type="button"
-                                className="btn btn-primary float-start"
-                                onClick={()=>this.createClick()}
-                                >Create</button>
-                                :null}
+                                    <div className="p-2 w-50 bd-highlight">
+                                        <div className="input-group mb-3">
+                                            <span className="input-group-text">itemTypeName</span>
+                                            <input type="text" className="form-control"
+                                                value={itemTypeName}
+                                                onChange={this.changeitemTypeName} />
+                                        </div>
+                                    </div>
 
-                                {itemTypeId!==0?
-                                <button type="button"
-                                className="btn btn-primary float-start"
-                                onClick={()=>this.updateClick()}
-                                >Update</button>
-                                :null}
-                             </div>
+                                    {itemTypeId === 0 ?
+                                        <button type="button"
+                                            className="btn btn-primary float-start"
+                                            onClick={() => this.createClick()}
+                                        >Create</button>
+                                        : null}
+
+                                    {itemTypeId !== 0 ?
+                                        <button type="button"
+                                            className="btn btn-primary float-start"
+                                            onClick={() => this.updateClick()}
+                                        >Update</button>
+                                        : null}
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
-
-
-
-
             </div>
-
         )
-
     }
 }

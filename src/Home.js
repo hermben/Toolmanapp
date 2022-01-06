@@ -7,8 +7,6 @@ export class Home extends Component{
             <div>
                 <h3> This is Home page </h3>
             </div>
-
-        )
-
+        );
     }
 };

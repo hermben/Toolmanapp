@@ -11,7 +11,6 @@ export class UserLogin extends Component {
                         </button>
 
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            {/* <UserLogin {...this.props} /> */}
                             <li>
                                 <button className="dropdown-item" onClick={this.props.onSignOut}>
                                     Logout
