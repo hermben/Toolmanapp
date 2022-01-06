@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { variables } from '../Variables';
+import toastr from 'toastr';
 
 export class ItemTypes extends Component {
 
@@ -61,10 +62,10 @@ export class ItemTypes extends Component {
         })
             .then(res => res.json())
             .then((result) => {
-                alert(result);
+                toastr.success("Created successfully");
                 this.refreshList();
             }, (error) => {
-                alert('Failed');
+                toastr.error("Failed");
             })
     }
 
@@ -74,7 +75,6 @@ export class ItemTypes extends Component {
             headers: {
                 'Accept': 'application/json',
                 'content-Type': 'application/json'
-
             },
             body: JSON.stringify({
                 itemTypeId: this.state.itemTypeId,
@@ -83,10 +83,10 @@ export class ItemTypes extends Component {
         })
             .then(res => res.json())
             .then((result) => {
-                alert(result);
+                toastr.success("Updated successfully");
                 this.refreshList();
             }, (error) => {
-                alert('Failed');
+                toastr.error('Failed');
             })
     }
 
@@ -101,10 +101,10 @@ export class ItemTypes extends Component {
             })
                 .then(res => res.json())
                 .then((result) => {
-                    alert(result);
+                    toastr.success("Deleted successfully");
                     this.refreshList();
                 }, (error) => {
-                    alert('Failed');
+                    toastr.error('Failed');
                 })
         }
     }
@@ -197,14 +197,14 @@ export class ItemTypes extends Component {
 
                                     {itemTypeId === 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start"
+                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
                                             onClick={() => this.createClick()}
                                         >Create</button>
                                         : null}
 
                                     {itemTypeId !== 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start"
+                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
                                             onClick={() => this.updateClick()}
                                         >Update</button>
                                         : null}

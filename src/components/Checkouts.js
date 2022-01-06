@@ -1,6 +1,6 @@
-
 import React, { Component } from 'react';
 import { variables } from '../Variables';
+import toastr from 'toastr';
 
 export class Checkouts extends Component {
 
@@ -104,7 +104,7 @@ export class Checkouts extends Component {
 
     createClick() {
         if (!this.ItemIdIsValide()) {
-            alert("Please Select an Item");
+            toastr.error("Please Select an Item");
             return;
         }
 
@@ -122,10 +122,10 @@ export class Checkouts extends Component {
         })
             .then(res => res.json())
             .then((result) => {
-                // alert(result);
+                toastr.success("Created successfully");
                 this.refreshList();
             }, (error) => {
-                alert('Failed');
+                toastr.error('Failed');
             });
 
     }
@@ -136,7 +136,7 @@ export class Checkouts extends Component {
 
     createClickCheckin() {
         if (!this.UserSignIsValid()) {
-            alert("Please enter you initials");
+            toastr.error("Please enter you initials");
             return;
         }
 
@@ -156,10 +156,10 @@ export class Checkouts extends Component {
         })
             .then(res => res.json())
             .then((result) => {
-                alert(result);
+                toastr.success("Item checkedin successfully");
                 this.refreshList();
             }, (error) => {
-                alert('Failed');
+                toastr.error('Failed');
             })
 
     }
@@ -180,10 +180,10 @@ export class Checkouts extends Component {
         })
             .then(res => res.json())
             .then((result) => {
-                alert(result);
+                toastr.success("Checkout Created successfully");
                 this.refreshList();
             }, (error) => {
-                alert('Failed');
+                toastr.error('Failed');
             });
 
     }
@@ -199,10 +199,10 @@ export class Checkouts extends Component {
             })
                 .then(res => res.json())
                 .then((result) => {
-                    alert(result);
+                    toastr.success("Checkout deleted successfully");
                     this.refreshList();
                 }, (error) => {
-                    alert('Failed');
+                    toastr.error('Failed');
                 })
         }
     }
@@ -345,7 +345,7 @@ export class Checkouts extends Component {
 
                                     {CheckoutId !== 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start"
+                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
                                             onClick={() => this.updateClick()}
                                         >Update</button>
                                         : null}
@@ -379,14 +379,14 @@ export class Checkouts extends Component {
                                 <div>
                                     {CheckinId === 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start"
+                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
                                             onClick={() => this.createClickCheckin()}
                                         >Create</button>
                                         : null}
 
                                     {CheckinId !== 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start"
+                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
                                             onClick={() => this.updateClickCheckin()}
                                         >Update</button>
                                         : null}
