@@ -12,7 +12,7 @@ export class UserLogin extends Component {
 
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li>
-                                <button className="dropdown-item" onClick={this.props.onSignOut}>
+                                <button className="dropdown-item" onClick={this.props.onSignOutClick}>
                                     Logout
                                 </button>
                             </li>
@@ -24,7 +24,7 @@ export class UserLogin extends Component {
         else {
             return (
                 <li className="nav-item M-1">
-                    <button className="btn btn-light btn-outline-primary" onClick={this.props.onSignIn}>
+                    <button className="btn btn-light btn-outline-primary" onClick={this.props.onSignInClick}>
                         Login
                     </button>
                 </li>

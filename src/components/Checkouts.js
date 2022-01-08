@@ -43,7 +43,7 @@ export class Checkouts extends Component {
                 console.log(data);
             });
 
-        fetch(variables.API_URL + 'Items')
+        fetch(variables.API_URL + 'Items/GetAvailable')
             .then(response => response.json())
             .then(data => {
                 this.setState({ Items: data });

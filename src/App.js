@@ -110,7 +110,7 @@ export class App extends Component {
                     </ul>
                   </div>
                 </li>
-                <UserLogin auth={this.state} onSignIn={() => this.onSignIn()} onSignOut={() => this.onSignOut()}/>
+                <UserLogin auth={this.state} onSignInClick={() => this.onSignIn()} onSignOutClick={() => this.onSignOut()}/>
               </ul>
             </nav>
 
