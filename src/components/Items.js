@@ -17,7 +17,7 @@ export class Items extends Component {
             ItemSerial: "",
             ItemDescription: "",
             IsCheckout: false,
-            ItemTypeId: 0
+            ItemTypeId: 0,   
         }
     }
 

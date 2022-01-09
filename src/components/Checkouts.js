@@ -230,7 +230,6 @@ export class Checkouts extends Component {
         const {
             modalTitle,
             CheckoutId,
-            Checkouts,
             ItemId,
             Items,
             UserSignature,
