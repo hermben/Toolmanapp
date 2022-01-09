@@ -151,6 +151,7 @@ export class ItemTypes extends Component {
                                 <td>{ty.ItemTypeName}</td>
                                 <td>
                                     <button type="button"
+                                        title='Update Item'
                                         className="btn btn-light m-1"
                                         data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
@@ -162,6 +163,7 @@ export class ItemTypes extends Component {
                                     </button>
 
                                     <button type="button"
+                                        title='Delete Item'
                                         className="btn btn-light mr-1"
                                         onClick={() => this.deleteClick(ty.ItemTypeID)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
