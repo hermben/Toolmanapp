@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { variables } from '../Variables';
 import toastr from 'toastr';
+import DateRangePicker from 'rsuite/DateRangePicker';
+import 'rsuite/dist/rsuite.min.css';
+
 
 export class Checkouts extends Component {
 
     constructor(props) {
         super(props);
 
+
         this.state = {
             Checkouts: [],
+            filteredCheckouts: [],
             Items: [],
             Users: [],
             ItemTypes: [],
@@ -23,7 +28,8 @@ export class Checkouts extends Component {
             IsCheckin: false,
             ItemTypeId: 0,
             UserSignature: "",
-            CheckinId: 0
+            CheckinId: 0,
+            dates: null,
         }
     }
 
@@ -31,9 +37,9 @@ export class Checkouts extends Component {
         fetch(variables.API_URL + 'Checkouts')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 this.setState({ Checkouts: data });
-                console.log(data);
+                // Filter checkout list
+                this.changeDates(this.state.dates);
             });
 
         fetch(variables.API_URL + 'Users')
@@ -53,6 +59,19 @@ export class Checkouts extends Component {
 
     componentDidMount() {
         this.refreshList();
+    }
+
+    changeDates = (newSelectedDates) => {
+        if (newSelectedDates != null) {
+            let newCheckoutsList = this.state.Checkouts.filter((checkout) => {
+                let formatedCheckoutTime = new Date(checkout.CheckoutTime);
+                return formatedCheckoutTime >= newSelectedDates[0] && formatedCheckoutTime <= newSelectedDates[1];
+            });
+            this.setState({ filteredCheckouts: newCheckoutsList });
+            this.setState({ dates: newSelectedDates });
+        } else {
+            this.setState({ filteredCheckouts: this.state.Checkouts });
+        }
     }
 
     changeUserSignature = (e) => {
@@ -222,13 +241,25 @@ export class Checkouts extends Component {
                 <div>
                     <h4> Checkouts </h4>
                 </div>
-                <button type="button"
-                    className="btn btn-primary m-2 float-end"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    onClick={() => this.addClick()}>
-                    Add Checkouts
-                </button>
+                <div>
+                    {/* <div className="input-group mb-3">
+                        <span className="input-group-text">Select Date range</span>
+                        <input type="text" className="form-control"
+                            id='dates'
+                            name='dates'
+                            value={this.state.dates}
+                            onChange={this.changeDates} />
+                    </div> */}
+                    <DateRangePicker className='float-start' onChange={this.changeDates} />
+
+                    <button type="button"
+                        className="btn btn-primary m-2 float-end"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        onClick={() => this.addClick()}>
+                        Add Checkouts
+                    </button>
+                </div>
 
                 <table className="table table -striped">
                     <thead>
@@ -254,7 +285,7 @@ export class Checkouts extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {Checkouts.map(ch =>
+                        {this.state.filteredCheckouts.map(ch =>
                             <tr key={ch.CheckoutID}>
                                 <td>{ch.UserName}</td>
                                 <td>{ch.CheckoutTime ? (new Date(ch.CheckoutTime)).toLocaleString('en-US') : null}</td>
@@ -264,6 +295,7 @@ export class Checkouts extends Component {
                                 <td>
                                     {ch.IsCheckin === 0 ?
                                         <button type="button"
+                                            title='Checkin Item'
                                             className="btn btn-light m-1"
                                             data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2"
@@ -276,6 +308,7 @@ export class Checkouts extends Component {
                                     }
 
                                     <button type="button"
+                                        title='Update Item'
                                         className="btn btn-light mrv-1"
                                         data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
@@ -288,6 +321,7 @@ export class Checkouts extends Component {
 
                                     {ch.IsCheckin === 0 ?
                                         <button type="button"
+                                            title='Delete Item'
                                             className="btn btn-light mr-1"
                                             onClick={() => this.deleteClick(ch.CheckoutID)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
