@@ -9,6 +9,7 @@ export class ItemTypes extends Component {
 
         this.state = {
             itemTypes: [],
+            errors: [],
             modalTitle: "",
             itemTypeId: "",
             itemTypeName: "",
@@ -19,9 +20,7 @@ export class ItemTypes extends Component {
         fetch(variables.API_URL + 'itemTypes')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 this.setState({ itemTypes: data });
-                console.log(data);
             });
     }
 
@@ -49,7 +48,29 @@ export class ItemTypes extends Component {
         });
     }
 
+    hasError(inputName) {
+        return this.state.errors.indexOf(inputName) !== -1;
+    }
+
+    validateForm() {
+        var errors = [];
+        if (this.state.itemTypeName === "") {
+            errors.push("itemTypeName");
+        }
+        this.setState({
+            errors: errors
+        });
+
+        if (errors.length > 0) {
+            return false;
+        }
+        return true;
+    }
+
     createClick() {
+        if (this.validateForm() === false)
+            return;
+
         fetch(variables.API_URL + 'ItemTypes', {
             method: 'POST',
             headers: {
@@ -182,34 +203,49 @@ export class ItemTypes extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">{modalTitle}</h5>
-                                <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
-                                </button>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className="d-flex flex-row bd-highlight mb-3">
 
-                                    <div className="p-2 w-50 bd-highlight">
+                                    <div className="p-2 w-100 bd-highlight">
                                         <div className="input-group mb-3">
+
                                             <span className="input-group-text">itemTypeName</span>
-                                            <input type="text" className="form-control"
+                                            <input type="text" className={
+                                                this.hasError("itemTypeName")
+                                                    ? "form-control is-invalid"
+                                                    : "form-control"}
+                                                name="itemTypeName"
                                                 value={itemTypeName}
                                                 onChange={this.changeitemTypeName} />
+                                            <div className={
+                                                this.hasError("itemTypeName") === true ? "invalid-feedback" : "visually-hidden"
+                                            } >
+                                                Please enter a value
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    {itemTypeId === 0 ?
-                                        <button type="button"
-                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
-                                            onClick={() => this.createClick()}
-                                        >Create</button>
-                                        : null}
+                                <div className="d-flex flex-row bd-highlight mb-3">
+                                    <div className="p-2 w-100 bd-highlight">
+                                        {itemTypeId === 0 ?
+                                            <button type="button"
+                                                className="btn btn-primary float-start"
+                                                onClick={() => this.createClick()}
+                                            >Create</button>
+                                            : null}
 
-                                    {itemTypeId !== 0 ?
-                                        <button type="button"
-                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
-                                            onClick={() => this.updateClick()}
-                                        >Update</button>
-                                        : null}
+                                        {itemTypeId !== 0 ?
+                                            <button type="button"
+                                                className="btn btn-primary float-start"
+                                                onClick={() => this.updateClick()}
+                                            >Update</button>
+                                            : null}
+
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

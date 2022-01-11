@@ -17,7 +17,8 @@ export class Items extends Component {
             ItemSerial: "",
             ItemDescription: "",
             IsCheckout: false,
-            ItemTypeId: 0,   
+            ItemTypeId: 0,
+            errors: []
         }
     }
 
@@ -83,8 +84,38 @@ export class Items extends Component {
             ItemTypeId: it.ItemTypeID
         });
     }
+    hasError(inputName) {
+        return this.state.errors.indexOf(inputName) !== -1;
+    }
+
+
+    validateForm() {
+        var errors = [];
+        if (this.state.ItemTypeId === 0) {
+            errors.push("ItemType");
+        }
+        if (this.state.ItemName === "") {
+            errors.push("ItemName");
+        }
+        if (this.state.ItemSerial === "") {
+            errors.push("ItemSerial");
+        }
+        if (this.state.ItemDescription === "") {
+            errors.push("ItemDescription");
+        }
+        this.setState({
+            errors: errors
+        });
+
+        if (errors.length > 0) {
+            return false;
+        }
+        return true;
+    }
 
     createClick() {
+        if (this.validateForm() === false)
+            return;
         fetch(variables.API_URL + 'Items', {
             method: 'POST',
             headers: {
@@ -244,8 +275,7 @@ export class Items extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">{modalTitle}</h5>
-                                <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
-                                </button>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <div className="modal-body">
@@ -255,39 +285,79 @@ export class Items extends Component {
 
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Item Type Name</span>
-                                            <select className="form-select"
+                                            {/* <select className="form-select" */}
+                                            <select className={
+                                                this.hasError("ItemType")
+                                                    ? "form-select is-invalid"
+                                                    : "form-select"}
+                                                name="ItemType"
                                                 onChange={this.changeItemType}
                                                 value={ItemTypeId}>
+                                                <option value={0}>
+                                                    Please Select an Item
+                                                </option>
                                                 {ItemTypes.map(ity =>
                                                     <option key={ity.ItemTypeID} value={ity.ItemTypeID}>
                                                         {ity.ItemTypeName}
                                                     </option>
-                                                )}
+                                                )}      
                                             </select>
+                                            <div className={
+                                                    this.hasError("ItemType") ? "invalid-feedback" : "visually-hidden"
+                                                } >
+                                                    Please select a value
+                                                </div>
                                         </div>
 
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Name</span>
-                                            <input type="text" className="form-control"
+                                            <input type="text" className={
+                                                this.hasError("ItemName")
+                                                    ? "form-control is-invalid"
+                                                    : "form-control"}
+                                                name="ItemName"
                                                 value={ItemName}
                                                 onChange={this.changeItemName} />
+                                            <div className={
+                                                this.hasError("ItemName") === true ? "invalid-feedback" : "visually-hidden"
+                                            } >
+                                                Please enter a value
+                                            </div>
                                         </div>
 
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Serial</span>
-                                            <input type="text" className="form-control"
+                                            <input type="text" className={
+                                                this.hasError("ItemSerial")
+                                                    ? "form-control is-invalid"
+                                                    : "form-control"}
+                                                name="ItemSerial"
                                                 value={ItemSerial}
                                                 onChange={this.changeItemSerial} />
+                                            <div className={
+                                                this.hasError("ItemSerial") === true ? "invalid-feedback" : "visually-hidden"
+                                            } >
+                                                Please enter a value
+                                            </div>
                                         </div>
 
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Description</span>
-                                            <input type="text" className="form-control"
+                                            <input type="text" className={
+                                                this.hasError("ItemDescription")
+                                                    ? "form-control is-invalid"
+                                                    : "form-control"}
+                                                name="ItemDescription"
                                                 value={ItemDescription}
                                                 onChange={this.changeItemDescription} />
+                                            <div className={
+                                                this.hasError("ItemDescription") === true ? "invalid-feedback" : "visually-hidden"
+                                            } >
+                                                Please enter a value
+                                            </div>
                                         </div>
 
-                                        <div className="form-group mb-3">
+                                        {/* <div className="form-group mb-3">
                                             <label className="form-label">Is Checkout</label>
 
                                             <div class="form-group">
@@ -306,24 +376,25 @@ export class Items extends Component {
                                                     No
                                                 </label>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
 
                                 <div>
                                     {ItemId === 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
+                                            className="btn btn-primary float-start"
                                             onClick={() => this.createClick()}
                                         >Create</button>
                                         : null}
 
                                     {ItemId !== 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
+                                            className="btn btn-primary float-start"
                                             onClick={() => this.updateClick()}
                                         >Update</button>
                                         : null}
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
 
                             </div>

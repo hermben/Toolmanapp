@@ -117,7 +117,6 @@ export class Checkouts extends Component {
     }
 
     ItemIdIsValide() {
-
         return this.state.ItemId !== 0;
     }
 
@@ -150,7 +149,7 @@ export class Checkouts extends Component {
     }
 
     UserSignIsValid() {
-        return this.state.UserSignature !== 0;
+        return this.state.UserSignature !== "";
     }
 
     createClickCheckin() {
@@ -264,13 +263,16 @@ export class Checkouts extends Component {
                     <thead>
                         <tr>
                             <th>
-                                UserName
+                               Engineer
                             </th>
                             <th>
                                 Checkout Time
                             </th>
                             <th>
-                                Name
+                                Item
+                            </th>
+                            <th>
+                                Serial
                             </th>
                             <th>
                                 Checkin Time
@@ -289,6 +291,7 @@ export class Checkouts extends Component {
                                 <td>{ch.UserName}</td>
                                 <td>{ch.CheckoutTime ? (new Date(ch.CheckoutTime)).toLocaleString('en-US') : null}</td>
                                 <td>{ch.ItemName}</td>
+                                <td>{ch.ItemSerial}</td>
                                 <td>{ch.CheckinTime ? (new Date(ch.CheckinTime)).toLocaleString('en-US') : null}</td>
                                 <td>{ch.UserSignature}</td>
                                 <td>
@@ -341,8 +344,7 @@ export class Checkouts extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">{modalTitle}</h5>
-                                <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
-                                </button>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <div className="modal-body">
@@ -370,18 +372,19 @@ export class Checkouts extends Component {
                                 <div>
                                     {CheckoutId === 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start btl-close"
-                                            data-bs-dismiss="modal" aria-label="close"
+                                            className="btn btn-primary float-start"
                                             onClick={() => this.createClick()}
                                         >Create</button>
                                         : null}
 
                                     {CheckoutId !== 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
+                                            className="btn btn-primary float-start"
                                             onClick={() => this.updateClick()}
                                         >Update</button>
                                         : null}
+
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -393,8 +396,7 @@ export class Checkouts extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">{modalTitle}</h5>
-                                <button type="button" className="btl-close" data-bs-dismiss="modal" aria-label="close">
-                                </button>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <div className="modal-body">
@@ -412,17 +414,18 @@ export class Checkouts extends Component {
                                 <div>
                                     {CheckinId === 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
+                                            className="btn btn-primary float-start"
                                             onClick={() => this.createClickCheckin()}
                                         >Create</button>
                                         : null}
 
                                     {CheckinId !== 0 ?
                                         <button type="button"
-                                            className="btn btn-primary float-start btl-close" data-bs-dismiss="modal" aria-label="close"
+                                            className="btn btn-primary float-start"
                                             onClick={() => this.updateClickCheckin()}
                                         >Update</button>
                                         : null}
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>

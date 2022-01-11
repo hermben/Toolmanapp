@@ -85,7 +85,7 @@ export class App extends Component {
         <BrowserRouter>
           <div className="App container">
             <h3 className="d-flex justify-content-center m-3">
-              React JS Frontend
+              Tool App Management
             </h3>
             <nav className="navbar navbar-expand-sm bg-light navbar-dark">
               <ul className="navbar-nav">
@@ -102,7 +102,7 @@ export class App extends Component {
                 <li className="nav-item M-1">
                   <div className="dropdown">
                     <button className="btn btn-light btn-outline-primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                      Menu
+                      Admin
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <li><Link className="dropdown-item" to="/items">Items</Link></li>
