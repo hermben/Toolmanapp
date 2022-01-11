@@ -242,7 +242,7 @@ export class Items extends Component {
                                 <td>{it.ItemName}</td>
                                 <td>{it.ItemSerial}</td>
                                 <td>{it.ItemDescription}</td>
-                                <td>{it.IsCheckout}</td>
+                                <td>{it.IsCheckout==0?"No":"Yes"}</td>
                                 <td>
                                     <button type="button"
                                         title='Update Item'
@@ -356,27 +356,6 @@ export class Items extends Component {
                                                 Please enter a value
                                             </div>
                                         </div>
-
-                                        {/* <div className="form-group mb-3">
-                                            <label className="form-label">Is Checkout</label>
-
-                                            <div class="form-group">
-                                                <label htmlFor="isAdminYes" className='form-label cmr-1'>
-                                                    <input className="form-check-input form-control" type="radio" name="isCheckout" id="isCheckoutYes"
-                                                        value={1}
-                                                        checked={IsCheckout}
-                                                        onChange={this.changeIsCheckout} />
-                                                    Yes
-                                                </label>
-                                                <label htmlFor="isAdminNo" className='form-label'>
-                                                    <input className="form-check-input form-control" type="radio" name="isCheckout" id="isCheckoutNo"
-                                                        value={0}
-                                                        checked={!IsCheckout}
-                                                        onChange={this.changeIsCheckout} />
-                                                    No
-                                                </label>
-                                            </div>
-                                        </div> */}
                                     </div>
                                 </div>
 
