@@ -88,9 +88,9 @@ export class App extends Component {
               Tool App Management
             </h3>
             <nav className="navbar navbar-expand-sm bg-light navbar-dark">
-              <ul className="navbar-nav">
+              <ul className="navbar-nav  me-auto mb-2 mb-lg-0">
                 <li className="nav-item M-1">
-                  <NavLink className="btn btn-light btn-outline-primary" to="/home">
+                  <NavLink className="btn btn-light btn-outline-primary" to="/">
                     Home
                   </NavLink>
                 </li>
@@ -110,12 +110,15 @@ export class App extends Component {
                     </ul>
                   </div>
                 </li>
-                <UserLogin auth={this.state} onSignInClick={() => this.onSignIn()} onSignOutClick={() => this.onSignOut()}/>
+              </ul>
+
+              <ul class="navbar-nav">
+                <UserLogin auth={this.state} onSignInClick={() => this.onSignIn()} onSignOutClick={() => this.onSignOut()} />
               </ul>
             </nav>
 
             <Routes>
-              <Route exact path="/home" element={<Home />} />
+              <Route exact path="/" element={<Home />} />
               <Route exact path="/Checkouts" element={<Checkouts auth={this.state} />} />
               <Route exact path="/Items" element={<Items />} />
               <Route exact path="/ItemTypes" element={<ItemTypes />} />
